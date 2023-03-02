@@ -13,8 +13,6 @@ $().ready(function () {
     var memo = $(this).prev().val();
     localStorage.setItem(timeblock, memo);
     
-    var oldInfo = localStorage.getItem(timeblock);
-    
     //console.log(timeblock);
     //console.log(memo);
     //console.log(oldInfo);
@@ -47,7 +45,6 @@ $().ready(function () {
     //console.log(shorttid[0]);
     //console.log(shorttid[1]);
 
-    ctime = 9;
     
     if(shorttid[1] < ctime){
         //console.log('past');
@@ -67,9 +64,21 @@ $().ready(function () {
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
+    for(i = 0; i < tblock.length; i++ ){
+        var getID = tblock[i]['id'];
+        //console.log(getID);
+        var oldInfo = localStorage.getItem(getID);
+        //console.log(oldInfo);
+        if(oldInfo != null){
+            $('#'+getID).children('textarea').val(oldInfo);
+        }
+
+    }
+    
   //
   // TODO: Add code to display the current date in the header of the page.
   var cday = dayjs().format('MM/DD/YYYY');
+  $('#currentDay').text(cday);
   console.log(cday);
 
 });
